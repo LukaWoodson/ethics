@@ -1,9 +1,9 @@
-import './App.css';
+import DisplayComponent from "./components/display/display.component";
 
 function App() {
   return (
     <div className="App">
-      Ethics App
+      <DisplayComponent />
     </div>
   );
 }
