@@ -1,37 +1,52 @@
-import {
-  Book,
-  BookBottom,
-  BookShadow,
-  BookSide,
-  ContentContainer,
-  PageWrapper,
-  Title,
-  TitleWrapper,
-} from "./display.styles";
+import { PageWrapper, Title, TitleWrapper } from "./display.styles";
+import Vara from "vara";
+import useWindowDimensions from "../window-dimensions";
+
+new Vara(
+  "#element",
+  "https://rawcdn.githack.com/akzhy/Vara/ed6ab92fdf196596266ae76867c415fa659eb348/fonts/Satisfy/SatisfySL.json",
+  [
+    {
+      text: "Handwritten",
+      textAlign: "center",
+    },
+  ],
+  {
+    fontSize: 46,
+  }
+);
 
 function DisplayComponent() {
+  const { height, width } = useWindowDimensions();
+
   return (
     <PageWrapper id={"PAGE WRAPPER"}>
       <TitleWrapper id={"TITLE WRAPPER"}>
         <Title id={"TITLE"}>Ethics in the Profession - Final Project</Title>
       </TitleWrapper>
-      <ContentContainer id={"container"}>
-        <Book id="book">
-          <div id="first paper">
-            <div id="page front contents">
-              <div id="intro">
-                <h2>DIARY</h2>
-                <h1>2019</h1>
-              </div>
-            </div>
-            <div id="page back"></div>
-          </div>
+      <div id="element"></div>
 
-          <BookSide id="side"></BookSide>
-          <BookBottom id="bottom"></BookBottom>
-          <BookShadow id="shadow"></BookShadow>
-        </Book>
-      </ContentContainer>
+      {/*<ContentContainer id={"container"}>*/}
+      {/*  <Book id="book">*/}
+      {/*    <div id="first paper">*/}
+      {/*      <div id="page front contents">*/}
+      {/*        <div id="intro">*/}
+      {/*          <h2>Revenge of the</h2>*/}
+
+      {/*          <h1>CODE</h1>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+
+      {/*      <div id="page back"></div>*/}
+      {/*    </div>*/}
+
+      {/*    <BookSide id="side"></BookSide>*/}
+
+      {/*    <BookBottom id="bottom"></BookBottom>*/}
+
+      {/*    <BookShadow id="shadow"></BookShadow>*/}
+      {/*  </Book>*/}
+      {/*</ContentContainer>*/}
     </PageWrapper>
   );
 }
