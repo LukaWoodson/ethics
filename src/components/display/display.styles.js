@@ -11,21 +11,13 @@ export const TitleWrapper = styled.div`
 export const Page = styled.div`
   height: 95%;
   aspect-ratio: 8.5/11;
-  background-color: lime;
+  background-color: ${({ isFlipped }) => (isFlipped ? "red" : "lime")};
   position: absolute;
   top: 2.5%;
 
   transition-duration: 2s;
   transform-origin: left;
-
-  ${(props) => {
-    if (props.isFlipped) {
-      return `
-            transform: rotateY(-180deg);
-            background-color: red;
-        `;
-    }
-  }}
+  transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
 `;
 
 export const Title = styled.div`

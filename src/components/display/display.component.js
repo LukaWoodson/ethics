@@ -34,7 +34,7 @@ function DisplayComponent() {
           onClick={() =>
             setPages(
               pages.map((page) =>
-                page.id === id ? { ...page, isFlipped: true } : page
+                page.id === id ? { ...page, isFlipped: !page.isFlipped } : page
               )
             )
           }
