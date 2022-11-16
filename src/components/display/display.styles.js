@@ -24,7 +24,7 @@ export const BookCover = styled.div`
   height: 100%;
   width: 100%;
   z-index: ${({ zIndex }) => zIndex || -100000000};
-  background-color: #cd2796;
+  background-color: ${({ theme }) => theme.book.cover};
   position: absolute;
 `;
 
@@ -32,6 +32,17 @@ export const FrontCover = styled(BookCover)`
   transition-duration: 2s;
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
+  border: #1a0d01 5px solid;
+`;
+
+export const BackCover = styled(BookCover)`
+  //padding-bottom: 3.5%;
+  position: relative;
+  top: 2.75%;
+  left: -2.75%;
+  background-color: ${({ isFlipped, theme }) =>
+    isFlipped ? theme.book.cover : theme.book.coverClosed};
+  border: #1a0d01 5px solid;
 `;
 
 export const Title = styled.div`
@@ -47,14 +58,15 @@ export const ContentContainer = styled.div`
 `;
 
 export const BookSide = styled.div`
-  width: 3em;
-  height: 40em;
-  background: #b36060;
+  width: 2rem;
+  height: 100%;
+  background: #673304;
   position: absolute;
-  left: -3em;
   top: 0;
-  transform-origin: 100% 100%;
-  transform: rotateY(-90deg) rotateX(0deg);
+  left: 0;
+  border: #1a0d01 5px solid;
+  transform-origin: left;
+  transform: rotateY(90deg) rotateX(0deg);
 `;
 
 export const BookBottom = styled.div`
@@ -78,9 +90,8 @@ export const Book = styled.div`
   right: 0;
   bottom: 10%;
   margin: auto;
-  height: 80%;
+  height: 70%;
   aspect-ratio: 8.5/11;
-  outline: 2px solid blue;
 `;
 
 export const PageWrapper = styled.div`

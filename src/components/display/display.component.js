@@ -1,4 +1,5 @@
 import {
+  BackCover,
   Book,
   BookBottom,
   BookCover,
@@ -14,6 +15,7 @@ import {
 
 import useWindowDimensions from "../window-dimensions";
 import { useEffect, useRef, useState } from "react";
+import { TestPages } from "../../data/test-pages";
 
 function DisplayComponent() {
   const { height, width } = useWindowDimensions();
@@ -21,19 +23,7 @@ function DisplayComponent() {
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
-  const [pages, setPages] = useState([
-    { isFlipped: false, id: 0, zIndex: 6 },
-    { isFlipped: false, id: 1, zIndex: 5 },
-    { isFlipped: false, id: 2, zIndex: 4 },
-    { isFlipped: false, id: 3, zIndex: 3 },
-    { isFlipped: false, id: 4, zIndex: 2 },
-    { isFlipped: false, id: 5, zIndex: 1 },
-  ]);
-
-  useEffect(() => {
-    pages.forEach((page) => console.log(page.zIndex));
-    console.log("----------------");
-  }, [pages]);
+  const [pages, setPages] = useState(TestPages());
 
   const handleFlip = (id) => {
     const { isFlipped } = pages[id];
@@ -61,6 +51,12 @@ function DisplayComponent() {
             isFlipped={isFlipped}
             id={id}
             zIndex={zIndex}
+            style={{
+              paddingRight: `${index / 30}%`,
+              paddingBottom: `${index / 10}%`,
+              borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
+              borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
+            }}
             onClick={() => handleFlip(id)}
           >
             <div className="front">{id}</div>
@@ -86,12 +82,8 @@ function DisplayComponent() {
             onClick={() => handleFlip(0)}
           />
           {paperCreation()}
-          <BookCover />
+          <BackCover />
           <BookSide id="side"></BookSide>
-
-          <BookBottom id="bottom"></BookBottom>
-
-          {/*<BookShadow id="shadow"></BookShadow>*/}
         </Book>
       </ContentContainer>
     </PageWrapper>
