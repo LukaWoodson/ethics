@@ -28,11 +28,12 @@ function DisplayComponent() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(isBookTurned);
+    //console.log(isBookTurned);
   }, [isBookTurned]);
 
-  const handleFlip = (id, e = null) => {
+  const handleFlip = async (id, e = null) => {
     if (isLoading) return;
+    setIsLoading(true);
     e?.stopPropagation();
     const { isFlipped } = pages[id];
     setPages(
@@ -48,11 +49,13 @@ function DisplayComponent() {
     );
     id === 0 && setBookTurned(!isBookTurned);
     isFlipped ? currentPageIndex.current++ : currentPageIndex.current--;
+    await delay(800);
+    setIsLoading(false);
   };
 
   const handleClose = async () => {
-    isBookTurned && setBookTurned(!isBookTurned);
     if (isLoading) return;
+    isBookTurned && setBookTurned(!isBookTurned);
     setIsLoading(true);
     let newPages = pages;
     for (let i = Math.abs(currentPageIndex.current) - 1; i >= 0; i--) {
