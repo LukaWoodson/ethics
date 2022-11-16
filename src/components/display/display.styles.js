@@ -60,7 +60,10 @@ export const FrontCover = styled(BookCover)`
 
 export const Book = styled.div`
   transform-style: preserve-3d;
-  transform: rotateX(45deg) rotateY(0deg) rotateZ(-45deg);
+  transform: ${({ isBookTurned }) =>
+    isBookTurned
+      ? "rotateX(0deg)"
+      : "rotateX(45deg) rotateY(0deg) rotateZ(-45deg)"};
   transition: transform 1s;
   position: relative;
   left: 0;
@@ -69,12 +72,15 @@ export const Book = styled.div`
   bottom: 10%;
   height: 70%;
   aspect-ratio: 8.5/11;
-  box-shadow: -40px 50px 20px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: ${({ isBookTurned }) =>
+    isBookTurned
+      ? "0 20px 20px 5px rgba(0, 0, 0, 0.75)"
+      : "-40px 50px 20px 4px rgba(0, 0, 0, 0.75)"};
 
   :hover {
-    transform-style: preserve-3d;
-    transform: rotateX(0deg);
-    box-shadow: 0 20px 20px 5px rgba(0, 0, 0, 0.75);
+    //transform-style: preserve-3d;
+    //transform: rotateX(0deg);
+    //box-shadow: 0 20px 20px 5px rgba(0, 0, 0, 0.75);
 
     ${BackCover} {
       top: 0;

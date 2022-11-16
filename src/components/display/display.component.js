@@ -24,8 +24,12 @@ function DisplayComponent() {
 
   // first item is the cover, and the rest are all pages
   const [pages, setPages] = useState(TestPages());
+  const [isBookTurned, setBookTurned] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFlip = (id) => {
+  const handleFlip = (id, e = null) => {
+    if (isLoading) return;
+    e?.stopPropagation();
     const { isFlipped } = pages[id];
     setPages(
       pages.map((page) =>
@@ -38,7 +42,32 @@ function DisplayComponent() {
           : page
       )
     );
+    id === 0 && setBookTurned(!isBookTurned);
     isFlipped ? currentPageIndex.current++ : currentPageIndex.current--;
+  };
+
+  const handleClose = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    let newPages = pages;
+    for (let i = Math.abs(currentPageIndex.current) - 1; i >= 0; i--) {
+      newPages = newPages.map((page) =>
+        page.id === i && page.isFlipped
+          ? {
+              ...page,
+              isFlipped: false,
+              zIndex: pages.length - i,
+            }
+          : page
+      );
+      setPages(newPages);
+      await delay(500);
+    }
+    setIsLoading(false);
+  };
+
+  const delay = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
   const paperCreation = () => {
@@ -57,7 +86,7 @@ function DisplayComponent() {
               borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
               borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
             }}
-            onClick={() => handleFlip(id)}
+            onClick={(e) => handleFlip(id, e)}
           >
             <div className="front">{id}</div>
             <div className="back"></div>
@@ -69,7 +98,7 @@ function DisplayComponent() {
   // Title: Revenge of the Code
 
   return (
-    <PageWrapper id={"PAGE WRAPPER"}>
+    <PageWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
       <TitleWrapper id={"TITLE WRAPPER"}>
         <Title id={"TITLE"}>Ethics in the Profession - Final Project</Title>
       </TitleWrapper>
@@ -79,7 +108,7 @@ function DisplayComponent() {
           <FrontCover
             zIndex={pages.at(0).zIndex}
             isFlipped={pages.at(0).isFlipped}
-            onClick={() => handleFlip(0)}
+            onClick={(e) => handleFlip(0, e)}
           />
           <>{paperCreation()}</>
           <BookSide id="side" />

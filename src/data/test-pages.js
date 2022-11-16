@@ -1,6 +1,6 @@
 export const TestPages = () => {
   const pages = [];
-  const COUNT = 60;
+  const COUNT = 5;
   for (let i = 0; i < COUNT; i++) {
     pages.push({
       isFlipped: false,
