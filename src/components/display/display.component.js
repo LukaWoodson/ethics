@@ -27,6 +27,10 @@ function DisplayComponent() {
   const [isBookTurned, setBookTurned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    console.log(isBookTurned);
+  }, [isBookTurned]);
+
   const handleFlip = (id, e = null) => {
     if (isLoading) return;
     e?.stopPropagation();
@@ -47,6 +51,7 @@ function DisplayComponent() {
   };
 
   const handleClose = async () => {
+    isBookTurned && setBookTurned(!isBookTurned);
     if (isLoading) return;
     setIsLoading(true);
     let newPages = pages;
@@ -104,7 +109,7 @@ function DisplayComponent() {
       </TitleWrapper>
 
       <ContentContainer id={"container"}>
-        <Book id="book">
+        <Book id="book" isBookTurned={isBookTurned}>
           <FrontCover
             zIndex={pages.at(0).zIndex}
             isFlipped={pages.at(0).isFlipped}
@@ -112,7 +117,7 @@ function DisplayComponent() {
           />
           <>{paperCreation()}</>
           <BookSide id="side" />
-          <BackCover />
+          <BackCover isBookTurned={isBookTurned} />
         </Book>
       </ContentContainer>
     </PageWrapper>

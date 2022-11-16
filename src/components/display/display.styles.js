@@ -47,8 +47,8 @@ export const BackCover = styled(BookCover)`
   background-color: ${({ isFlipped, theme }) =>
     isFlipped ? theme.book.cover : theme.book.coverClosed};
   border: #1a0d01 5px solid;
-  top: 4%;
-  left: -5%;
+  top: ${({ isBookTurned }) => (isBookTurned ? "0" : "4%")};
+  left: ${({ isBookTurned }) => (isBookTurned ? "0" : "5%")};
 `;
 
 export const FrontCover = styled(BookCover)`
@@ -76,17 +76,6 @@ export const Book = styled.div`
     isBookTurned
       ? "0 20px 20px 5px rgba(0, 0, 0, 0.75)"
       : "-40px 50px 20px 4px rgba(0, 0, 0, 0.75)"};
-
-  :hover {
-    //transform-style: preserve-3d;
-    //transform: rotateX(0deg);
-    //box-shadow: 0 20px 20px 5px rgba(0, 0, 0, 0.75);
-
-    ${BackCover} {
-      top: 0;
-      left: 0;
-    }
-  }
 `;
 
 export const Page = styled.div`
