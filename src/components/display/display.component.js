@@ -81,9 +81,9 @@ function DisplayComponent() {
             isFlipped={pages.at(0).isFlipped}
             onClick={() => handleFlip(0)}
           />
-          {paperCreation()}
+          <>{paperCreation()}</>
+          <BookSide id="side" />
           <BackCover />
-          <BookSide id="side"></BookSide>
         </Book>
       </ContentContainer>
     </PageWrapper>
