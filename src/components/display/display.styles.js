@@ -11,10 +11,24 @@ export const TitleWrapper = styled.div`
 export const Page = styled.div`
   height: 95%;
   aspect-ratio: 8.5/11;
-  background-color: ${({ isFlipped }) => (isFlipped ? "red" : "lime")};
+  background-color: ${({ isFlipped }) => (isFlipped ? "#e3e3e3" : "white")};
   position: absolute;
   top: 2.5%;
+  z-index: ${({ zIndex }) => zIndex};
+  transition-duration: 2s;
+  transform-origin: left;
+  transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
+`;
 
+export const BookCover = styled.div`
+  height: 100%;
+  width: 100%;
+  z-index: ${({ zIndex }) => zIndex || -100000000};
+  background-color: #cd2796;
+  position: absolute;
+`;
+
+export const FrontCover = styled(BookCover)`
   transition-duration: 2s;
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
