@@ -124,13 +124,12 @@ function DisplayComponent() {
                     onClick={(e) => handleFlip(id, e)}
                   >
                     <div className="front">
-                      {zIndex}
-                      {/* <CanvasComponent
-                      pageCount={pages.length}
-                      isShown={pages[index].isFlipped}
-                      id={index}
-                      textArray={content[index]}
-                    /> */}
+                      <CanvasComponent
+                        pageCount={pages.length}
+                        isShown={pages[index].isFlipped}
+                        id={index}
+                        textArray={content[index]}
+                      />
                     </div>
                   </Page>
                 );
