@@ -1,9 +1,6 @@
 import {
   BackCover,
   Book,
-  BookBottom,
-  BookCover,
-  BookShadow,
   BookSide,
   ContentContainer,
   FrontCover,
@@ -69,7 +66,7 @@ function DisplayComponent() {
           : page
       );
       setPages(newPages);
-      await delay(500);
+      await delay(300);
     }
     setIsLoading(false);
   };
@@ -87,10 +84,10 @@ function DisplayComponent() {
             key={`${index}page`}
             isFlipped={isFlipped}
             id={id}
+            isBookTurned={isBookTurned}
+            index={index}
             zIndex={zIndex}
             style={{
-              paddingRight: `${index / 30}%`,
-              paddingBottom: `${index / 10}%`,
               borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
               borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
             }}
@@ -119,8 +116,8 @@ function DisplayComponent() {
             onClick={(e) => handleFlip(0, e)}
           />
           <>{paperCreation()}</>
-          <BookSide id="side" />
           <BackCover isBookTurned={isBookTurned} />
+          <BookSide id="side" />
         </Book>
       </ContentContainer>
     </PageWrapper>

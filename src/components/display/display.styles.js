@@ -44,6 +44,7 @@ export const BookCover = styled.div`
 `;
 
 export const BackCover = styled(BookCover)`
+  transition-duration: 1s;
   background-color: ${({ isFlipped, theme }) =>
     isFlipped ? theme.book.cover : theme.book.coverClosed};
   border: #1a0d01 5px solid;
@@ -85,9 +86,13 @@ export const Page = styled.div`
   position: absolute;
   top: 2.5%;
   z-index: ${({ zIndex }) => zIndex};
-  transition-duration: 2s;
+  padding-right: ${({ index, isBookTurned }) =>
+    `${isBookTurned ? index / 20 : index / 30}%`};
+  padding-bottom: ${({ index, isBookTurned }) =>
+    `${isBookTurned ? index / 20 : index / 3.4}%`};
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
+  transition: transform 2s, padding 1s, background-color 2s;
 `;
 
 export const BookSide = styled.div`
