@@ -7,7 +7,7 @@ const CreateVaraOBJ = (id, textArray) => {
     textArray.map((text) => ({
       text,
       autoAnimation: false,
-      duration: 3000,
+      duration: 10000,
       x: 0,
       y: 0,
       fromCurrentPosition: {
@@ -15,7 +15,7 @@ const CreateVaraOBJ = (id, textArray) => {
         y: false,
       },
     })),
-    { fontSize: 10 }
+    { fontSize: 8 }
   );
 };
 

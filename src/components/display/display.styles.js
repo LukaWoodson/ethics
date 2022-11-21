@@ -102,7 +102,7 @@ export const Page = styled.div`
 
   & > * {
     opacity: ${({ isFlipped }) => (isFlipped ? "5%" : "100%")};
-    transition: opacity 150ms 400ms;
+    transition: opacity 150ms 500ms;
   }
 `;
 

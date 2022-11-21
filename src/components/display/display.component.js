@@ -12,8 +12,10 @@ import {
 
 import useWindowDimensions from "../window-dimensions";
 import { useEffect, useRef, useState } from "react";
-import { TestPages } from "../../data/test-pages";
 import CanvasComponent from "../canvas/canvas.component";
+import { Doc_parser } from "../../data/doc_parser";
+
+const content = Doc_parser();
 
 function DisplayComponent() {
   const { height, width } = useWindowDimensions();
@@ -21,13 +23,16 @@ function DisplayComponent() {
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
-  const [pages, setPages] = useState(TestPages());
+  const [pages, setPages] = useState([
+    { isFlipped: false, id: 0, zIndex: content.length + 1 },
+    ...content.map((string, i) => ({
+      isFlipped: false,
+      id: i + 1,
+      zIndex: content.length - i - 1,
+    })),
+  ]);
   const [isBookTurned, setBookTurned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    //console.log(isBookTurned);
-  }, [isBookTurned]);
 
   const handleFlip = async (id, e = null) => {
     if (isLoading) return;
@@ -79,7 +84,7 @@ function DisplayComponent() {
   const paperCreation = () => {
     return pages
       .filter((page) => page.id !== 0)
-      .map(({ isFlipped, id, zIndex, text }, index) => {
+      .map(({ isFlipped, id, zIndex }, index) => {
         return (
           <Page
             key={`${index}page`}
@@ -99,7 +104,7 @@ function DisplayComponent() {
                 pageCount={pages.length}
                 isShown={pages[index].isFlipped}
                 id={index}
-                textArray={text}
+                textArray={content[index]}
               />
             </div>
           </Page>
