@@ -11,6 +11,7 @@ export const theme = {
   page: {
     top: "2.5%",
     aspectRatio: "8.5/11",
+    zTranslateScalar: 1.7,
     height: "95%",
   },
 };

@@ -95,6 +95,8 @@ function DisplayComponent() {
 
       <ContentContainer id={"container"}>
         <Book id="book" isBookTurned={isBookTurned}>
+          <BookSide id="side" />
+
           <FrontCover
             zIndex={pages.at(BOOK_COVER_ID).zIndex}
             isFlipped={pages.at(BOOK_COVER_ID).isFlipped}
@@ -135,7 +137,6 @@ function DisplayComponent() {
               })
           }
           <BackCover isBookTurned={isBookTurned} />
-          <BookSide id="side" />
         </Book>
       </ContentContainer>
     </SiteWrapper>
