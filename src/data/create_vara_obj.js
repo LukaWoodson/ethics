@@ -15,7 +15,7 @@ const CreateVaraOBJ = (id, textArray) => {
         y: false,
       },
     })),
-    { fontSize: 20 }
+    { fontSize: 10 }
   );
 };
 

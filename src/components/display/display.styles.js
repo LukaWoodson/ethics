@@ -78,7 +78,14 @@ export const Book = styled.div`
 `;
 
 export const Page = styled.div`
-  background-color: ${({ isFlipped }) => (isFlipped ? "#e3e3e3" : "white")};
+  background: rgb(164, 164, 164);
+  background: linear-gradient(
+    90deg,
+    rgba(164, 164, 164, 1) 0%,
+    rgba(215, 215, 215, 1) 7%,
+    rgba(231, 231, 231, 1) 14%,
+    rgba(255, 255, 255, 1) 100%
+  );
   position: absolute;
   height: ${({ theme }) => theme.page.height};
   top: ${({ theme }) => theme.page.top};
@@ -91,6 +98,12 @@ export const Page = styled.div`
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
   transition: transform 2s, padding 1s, background-color 2s;
+  border-left: 1px solid grey;
+
+  & > * {
+    opacity: ${({ isFlipped }) => (isFlipped ? "5%" : "100%")};
+    transition: opacity 150ms 400ms;
+  }
 `;
 
 export const BookSide = styled.div`
