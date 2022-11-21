@@ -11,14 +11,13 @@ import {
 } from "./display.styles";
 
 import useWindowDimensions from "../window-dimensions";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
 
 const content = Doc_parser();
 
 function DisplayComponent() {
-  const { height, width } = useWindowDimensions();
 
   const currentPageIndex = useRef(0);
 
@@ -43,10 +42,10 @@ function DisplayComponent() {
       pages.map((page) =>
         page.id === id
           ? {
-              ...page,
-              isFlipped: !isFlipped,
-              zIndex: !isFlipped ? pages.length + id : pages.length - id,
-            }
+            ...page,
+            isFlipped: !isFlipped,
+            zIndex: !isFlipped ? pages.length + id : pages.length - id,
+          }
           : page
       )
     );
@@ -65,15 +64,17 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-              ...page,
-              isFlipped: false,
-              zIndex: pages.length - i,
-            }
+            ...page,
+            isFlipped: false,
+            zIndex: pages.length - i,
+          }
           : page
       );
       setPages(newPages);
       await delay(300);
     }
+
+    currentPageIndex.current = 0;
     setIsLoading(false);
   };
 
@@ -100,12 +101,12 @@ function DisplayComponent() {
             onClick={(e) => handleFlip(id, e)}
           >
             <div className="front">
-              <CanvasComponent
+              {/* <CanvasComponent
                 pageCount={pages.length}
                 isShown={pages[index].isFlipped}
                 id={index}
                 textArray={content[index]}
-              />
+              /> */}
             </div>
           </Page>
         );
