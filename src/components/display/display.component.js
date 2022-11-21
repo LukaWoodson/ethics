@@ -79,7 +79,7 @@ function DisplayComponent() {
   const paperCreation = () => {
     return pages
       .filter((page) => page.id !== 0)
-      .map(({ isFlipped, id, zIndex }, index) => {
+      .map(({ isFlipped, id, zIndex, text }, index) => {
         return (
           <Page
             key={`${index}page`}
@@ -95,7 +95,12 @@ function DisplayComponent() {
             onClick={(e) => handleFlip(id, e)}
           >
             <div className="front">
-              {/*<CanvasComponent pageCount={pages.length} isFlipped={isFlipped} />*/}
+              <CanvasComponent
+                pageCount={pages.length}
+                isShown={pages[index].isFlipped}
+                id={index}
+                textArray={text}
+              />
             </div>
           </Page>
         );

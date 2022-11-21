@@ -6,6 +6,7 @@ export const TestPages = () => {
       isFlipped: false,
       id: i,
       zIndex: COUNT - i,
+      text: [`Page ${i}`],
     });
   }
   return pages;

@@ -1,11 +1,10 @@
 import Vara from "vara";
 
-const CreateVaraOBJ = () => {
-  console.log("CreateVaraObj");
+const CreateVaraOBJ = (id, textArray) => {
   return new Vara(
-    "#element",
+    `#${id}`,
     "pacificoSLO.json",
-    content.map((text) => ({
+    textArray.map((text) => ({
       text,
       autoAnimation: false,
       duration: 3000,
@@ -16,10 +15,8 @@ const CreateVaraOBJ = () => {
         y: false,
       },
     })),
-    { fontSize: 46 }
+    { fontSize: 20 }
   );
 };
-
-const content = ["first", "second", "third", "fourth"];
 
 export default CreateVaraOBJ;
