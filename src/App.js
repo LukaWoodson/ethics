@@ -7,7 +7,7 @@ import { theme } from "./_theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div id="App">
         {/*<div id="random"></div>*/}
         <DisplayComponent />
       </div>

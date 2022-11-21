@@ -1,21 +1,21 @@
 import {
   BackCover,
   Book,
-  BookBottom,
-  BookCover,
-  BookShadow,
   BookSide,
   ContentContainer,
   FrontCover,
   Page,
-  PageWrapper,
+  SiteWrapper,
   Title,
   TitleWrapper,
 } from "./display.styles";
 
 import useWindowDimensions from "../window-dimensions";
 import { useEffect, useRef, useState } from "react";
-import { TestPages } from "../../data/test-pages";
+import CanvasComponent from "../canvas/canvas.component";
+import { Doc_parser } from "../../data/doc_parser";
+
+const content = Doc_parser();
 
 function DisplayComponent() {
   const { height, width } = useWindowDimensions();
@@ -23,13 +23,16 @@ function DisplayComponent() {
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
-  const [pages, setPages] = useState(TestPages());
+  const [pages, setPages] = useState([
+    { isFlipped: false, id: 0, zIndex: content.length + 1 },
+    ...content.map((string, i) => ({
+      isFlipped: false,
+      id: i + 1,
+      zIndex: content.length - i - 1,
+    })),
+  ]);
   const [isBookTurned, setBookTurned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    //console.log(isBookTurned);
-  }, [isBookTurned]);
 
   const handleFlip = async (id, e = null) => {
     if (isLoading) return;
@@ -69,7 +72,7 @@ function DisplayComponent() {
           : page
       );
       setPages(newPages);
-      await delay(500);
+      await delay(300);
     }
     setIsLoading(false);
   };
@@ -87,17 +90,23 @@ function DisplayComponent() {
             key={`${index}page`}
             isFlipped={isFlipped}
             id={id}
+            isBookTurned={isBookTurned}
+            index={index}
             zIndex={zIndex}
             style={{
-              paddingRight: `${index / 30}%`,
-              paddingBottom: `${index / 10}%`,
               borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
               borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
             }}
             onClick={(e) => handleFlip(id, e)}
           >
-            <div className="front">{id}</div>
-            <div className="back"></div>
+            <div className="front">
+              <CanvasComponent
+                pageCount={pages.length}
+                isShown={pages[index].isFlipped}
+                id={index}
+                textArray={content[index]}
+              />
+            </div>
           </Page>
         );
       });
@@ -106,7 +115,7 @@ function DisplayComponent() {
   // Title: Revenge of the Code
 
   return (
-    <PageWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
+    <SiteWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
       <TitleWrapper id={"TITLE WRAPPER"}>
         <Title id={"TITLE"}>Ethics in the Profession - Final Project</Title>
       </TitleWrapper>
@@ -119,11 +128,12 @@ function DisplayComponent() {
             onClick={(e) => handleFlip(0, e)}
           />
           <>{paperCreation()}</>
-          <BookSide id="side" />
           <BackCover isBookTurned={isBookTurned} />
+
+          <BookSide id="side" />
         </Book>
       </ContentContainer>
-    </PageWrapper>
+    </SiteWrapper>
   );
 }
 
