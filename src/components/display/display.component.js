@@ -10,7 +10,7 @@ import {
   TitleWrapper,
 } from "./display.styles";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
 
@@ -19,12 +19,11 @@ const BOOK_COVER_ID = 0;
 
 function DisplayComponent() {
 
-  console.log("RE-RENDER-BOOK");
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
   const [pages, setPages] = useState([
-    { isFlipped: false, id: 0, zIndex: content.length + 1 },
+    { isFlipped: false, id: 0, zIndex: content.length },
     ...content.map((string, i) => ({
       isFlipped: false,
       id: i + 1,
@@ -101,7 +100,9 @@ function DisplayComponent() {
             isFlipped={pages.at(BOOK_COVER_ID).isFlipped}
             onClick={(e) => handleFlip(BOOK_COVER_ID, e)}
             key={`${BOOK_COVER_ID}-page`}
-          />
+          >
+            {pages.at(BOOK_COVER_ID).zIndex}
+          </FrontCover>
           {
             pages
               .filter((page) => page.id !== BOOK_COVER_ID)
@@ -121,6 +122,7 @@ function DisplayComponent() {
                     onClick={(e) => handleFlip(id, e)}
                   >
                     <div className="front">
+                      {zIndex}
                       {/* <CanvasComponent
                       pageCount={pages.length}
                       isShown={pages[index].isFlipped}

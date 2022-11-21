@@ -97,7 +97,8 @@ export const Page = styled.div`
     `${isBookTurned ? index / 20 : index / 3.4}%`};
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
-  transition: transform 2s, padding 1s, background-color 2s;
+  // TODO: choose a good delay for the z-index
+  transition: transform 2s, padding 1s, background-color 2s, z-index 0s 300ms;
   border-left: 1px solid grey;
 
   & > * {
