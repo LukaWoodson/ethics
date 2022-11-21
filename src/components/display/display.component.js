@@ -10,15 +10,16 @@ import {
   TitleWrapper,
 } from "./display.styles";
 
-import useWindowDimensions from "../window-dimensions";
 import { useRef, useState } from "react";
 import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
 
 const content = Doc_parser();
+const BOOK_COVER_ID = 0;
 
 function DisplayComponent() {
 
+  console.log("RE-RENDER-BOOK");
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
@@ -32,6 +33,8 @@ function DisplayComponent() {
   ]);
   const [isBookTurned, setBookTurned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+
 
   const handleFlip = async (id, e = null) => {
     if (isLoading) return;
@@ -82,36 +85,36 @@ function DisplayComponent() {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  const paperCreation = () => {
-    return pages
-      .filter((page) => page.id !== 0)
-      .map(({ isFlipped, id, zIndex }, index) => {
-        return (
-          <Page
-            key={`${index}page`}
-            isFlipped={isFlipped}
-            id={id}
-            isBookTurned={isBookTurned}
-            index={index}
-            zIndex={zIndex}
-            style={{
-              borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
-              borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
-            }}
-            onClick={(e) => handleFlip(id, e)}
-          >
-            <div className="front">
-              {/* <CanvasComponent
-                pageCount={pages.length}
-                isShown={pages[index].isFlipped}
-                id={index}
-                textArray={content[index]}
-              /> */}
-            </div>
-          </Page>
-        );
-      });
-  };
+  // const paperCreation = () => {
+  //   return pages
+  //     .filter((page) => page.id !== 0)
+  //     .map(({ isFlipped, id, zIndex }, index) => {
+  //       return (
+  //         <Page
+  //           key={`${index}page`}
+  //           isFlipped={isFlipped}
+  //           id={id}
+  //           isBookTurned={isBookTurned}
+  //           index={index}
+  //           zIndex={zIndex}
+  //           style={{
+  //             borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
+  //             borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
+  //           }}
+  //           onClick={(e) => handleFlip(id, e)}
+  //         >
+  //           <div className="front">
+  //             {/* <CanvasComponent
+  //               pageCount={pages.length}
+  //               isShown={pages[index].isFlipped}
+  //               id={index}
+  //               textArray={content[index]}
+  //             /> */}
+  //           </div>
+  //         </Page>
+  //       );
+  //     });
+  // };
 
   // Title: Revenge of the Code
 
@@ -124,13 +127,42 @@ function DisplayComponent() {
       <ContentContainer id={"container"}>
         <Book id="book" isBookTurned={isBookTurned}>
           <FrontCover
-            zIndex={pages.at(0).zIndex}
-            isFlipped={pages.at(0).isFlipped}
-            onClick={(e) => handleFlip(0, e)}
+            zIndex={pages.at(BOOK_COVER_ID).zIndex}
+            isFlipped={pages.at(BOOK_COVER_ID).isFlipped}
+            onClick={(e) => handleFlip(BOOK_COVER_ID, e)}
+            key={`${BOOK_COVER_ID}-page`}
           />
-          <>{paperCreation()}</>
+          {
+            pages
+              .filter((page) => page.id !== BOOK_COVER_ID)
+              .map(({ isFlipped, id, zIndex }, index) => {
+                return (
+                  <Page
+                    key={`${id}-page`}
+                    isFlipped={isFlipped}
+                    id={id}
+                    isBookTurned={isBookTurned}
+                    index={index}
+                    zIndex={zIndex}
+                    style={{
+                      borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
+                      borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
+                    }}
+                    onClick={(e) => handleFlip(id, e)}
+                  >
+                    <div className="front">
+                      {/* <CanvasComponent
+                      pageCount={pages.length}
+                      isShown={pages[index].isFlipped}
+                      id={index}
+                      textArray={content[index]}
+                    /> */}
+                    </div>
+                  </Page>
+                );
+              })
+          }
           <BackCover isBookTurned={isBookTurned} />
-
           <BookSide id="side" />
         </Book>
       </ContentContainer>
