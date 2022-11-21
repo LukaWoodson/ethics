@@ -32,13 +32,12 @@ function DisplayComponent() {
     })),
   ]);
   const [isBookTurned, setBookTurned] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-
+  const _isLoading = useRef(false)
 
   const handleFlip = async (id, e = null) => {
-    if (isLoading) return;
-    setIsLoading(true);
+    if (_isLoading.current) return;
+    _isLoading.current = true;
     e?.stopPropagation();
     const { isFlipped } = pages[id];
     setPages(
@@ -55,13 +54,13 @@ function DisplayComponent() {
     id === 0 && setBookTurned(!isBookTurned);
     isFlipped ? currentPageIndex.current++ : currentPageIndex.current--;
     await delay(800);
-    setIsLoading(false);
+    _isLoading.current = false;
   };
 
   const handleClose = async () => {
-    if (isLoading) return;
+    if (_isLoading.current) return;
     isBookTurned && setBookTurned(!isBookTurned);
-    setIsLoading(true);
+    _isLoading.current = true;
     let newPages = pages;
     for (let i = Math.abs(currentPageIndex.current) - 1; i >= 0; i--) {
       newPages = newPages.map((page) =>
@@ -78,43 +77,14 @@ function DisplayComponent() {
     }
 
     currentPageIndex.current = 0;
-    setIsLoading(false);
+    _isLoading.current = false;
   };
 
   const delay = async (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  // const paperCreation = () => {
-  //   return pages
-  //     .filter((page) => page.id !== 0)
-  //     .map(({ isFlipped, id, zIndex }, index) => {
-  //       return (
-  //         <Page
-  //           key={`${index}page`}
-  //           isFlipped={isFlipped}
-  //           id={id}
-  //           isBookTurned={isBookTurned}
-  //           index={index}
-  //           zIndex={zIndex}
-  //           style={{
-  //             borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
-  //             borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
-  //           }}
-  //           onClick={(e) => handleFlip(id, e)}
-  //         >
-  //           <div className="front">
-  //             {/* <CanvasComponent
-  //               pageCount={pages.length}
-  //               isShown={pages[index].isFlipped}
-  //               id={index}
-  //               textArray={content[index]}
-  //             /> */}
-  //           </div>
-  //         </Page>
-  //       );
-  //     });
-  // };
+
 
   // Title: Revenge of the Code
 
