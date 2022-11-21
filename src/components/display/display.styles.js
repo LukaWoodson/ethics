@@ -66,11 +66,11 @@ export const Book = styled.div`
   transform-style: preserve-3d;
   transform: ${({ isBookTurned }) =>
     isBookTurned
-      ? "rotateX(0deg)"
+      ? "rotateX(0deg) translateX(50%)"
       : "rotateX(45deg) rotateY(0deg) rotateZ(-45deg)"};
   transition: transform 1s, left 2s;
   position: absolute;
-  left: ${({ isBookTurned }) => (isBookTurned ? "30%" : 0)};
+  left: 0;
   top: 0;
   right: 0;
   bottom: 0;
