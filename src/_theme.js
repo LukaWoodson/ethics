@@ -8,4 +8,9 @@ export const theme = {
     },
     title: "",
   },
+  page: {
+    top: "2.5%",
+    aspectRatio: "8.5/11",
+    height: "95%",
+  },
 };

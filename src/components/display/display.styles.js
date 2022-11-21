@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // -------------- SITE --------------
 
-export const PageWrapper = styled.div`
+export const SiteWrapper = styled.div`
   background-color: burlywood;
   width: 100vw;
   height: 100vh;
@@ -12,8 +12,8 @@ export const PageWrapper = styled.div`
 
 export const TitleWrapper = styled.div`
   background-color: darkblue;
-  padding: 10px;
   display: flex;
+  height: 4rem;
   justify-content: center;
   box-shadow: 0 5px 7px black;
 `;
@@ -24,11 +24,8 @@ export const Title = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  width: fit-content;
-  height: 90vh;
-  margin: auto;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  flex-grow: 1;
 `;
 
 // -------------- BOOK --------------
@@ -65,12 +62,13 @@ export const Book = styled.div`
     isBookTurned
       ? "rotateX(0deg)"
       : "rotateX(45deg) rotateY(0deg) rotateZ(-45deg)"};
-  transition: transform 1s;
-  position: relative;
-  left: 0;
+  transition: transform 1s, left 2s;
+  position: absolute;
+  left: ${({ isBookTurned }) => (isBookTurned ? "30%" : 0)};
   top: 0;
   right: 0;
-  bottom: 10%;
+  bottom: 0;
+  margin: auto;
   height: 70%;
   aspect-ratio: 8.5/11;
   box-shadow: ${({ isBookTurned }) =>
@@ -80,11 +78,11 @@ export const Book = styled.div`
 `;
 
 export const Page = styled.div`
-  height: 95%;
-  aspect-ratio: 8.5/11;
   background-color: ${({ isFlipped }) => (isFlipped ? "#e3e3e3" : "white")};
   position: absolute;
-  top: 2.5%;
+  height: ${({ theme }) => theme.page.height};
+  top: ${({ theme }) => theme.page.top};
+  aspect-ratio: ${({ theme }) => theme.page.aspectRatio};
   z-index: ${({ zIndex }) => zIndex};
   padding-right: ${({ index, isBookTurned }) =>
     `${isBookTurned ? index / 20 : index / 30}%`};

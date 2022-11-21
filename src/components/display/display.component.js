@@ -5,7 +5,7 @@ import {
   ContentContainer,
   FrontCover,
   Page,
-  PageWrapper,
+  SiteWrapper,
   Title,
   TitleWrapper,
 } from "./display.styles";
@@ -13,6 +13,7 @@ import {
 import useWindowDimensions from "../window-dimensions";
 import { useEffect, useRef, useState } from "react";
 import { TestPages } from "../../data/test-pages";
+import CanvasComponent from "../canvas/canvas.component";
 
 function DisplayComponent() {
   const { height, width } = useWindowDimensions();
@@ -93,8 +94,9 @@ function DisplayComponent() {
             }}
             onClick={(e) => handleFlip(id, e)}
           >
-            <div className="front">{id}</div>
-            <div className="back"></div>
+            <div className="front">
+              {/*<CanvasComponent pageCount={pages.length} isFlipped={isFlipped} />*/}
+            </div>
           </Page>
         );
       });
@@ -103,7 +105,7 @@ function DisplayComponent() {
   // Title: Revenge of the Code
 
   return (
-    <PageWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
+    <SiteWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
       <TitleWrapper id={"TITLE WRAPPER"}>
         <Title id={"TITLE"}>Ethics in the Profession - Final Project</Title>
       </TitleWrapper>
@@ -117,10 +119,11 @@ function DisplayComponent() {
           />
           <>{paperCreation()}</>
           <BackCover isBookTurned={isBookTurned} />
+
           <BookSide id="side" />
         </Book>
       </ContentContainer>
-    </PageWrapper>
+    </SiteWrapper>
   );
 }
 
