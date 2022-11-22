@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, memo } from "react";
 import create_vara_obj from "../../data/create_vara_obj";
 import { StyledCanvas } from "./canvas.styles";
 
-
+const DELAY = 5000;
 const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const vara = useRef(null);
   const hasBeenDrawn = useRef(false)
@@ -12,13 +12,14 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    create_vara_obj(ID, [textArray]).then((_vara) => {
-      vara.current = _vara
-      setIsLoading(false);
-    });
+
+    vara.current = create_vara_obj(ID, [textArray])
+    setIsLoading(false);
+
   }, []);
 
   const draw = () => {
+    console.log("DRAW");
     hasBeenDrawn.current = true;
     vara.current.draw(0)
   }
@@ -29,6 +30,10 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
     if (hasBeenDrawn.current) return;
     else if (isShown && !isLoading) draw();
   }, [isShown, isLoading]);
+
+  // useEffect(() => {
+  //   isShown && draw();
+  // }, [isShown])
 
   return <StyledCanvas id={ID} pageCount={pageCount} isShown={isShown} />;
 };
