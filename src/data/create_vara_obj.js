@@ -9,7 +9,7 @@ const CreateVaraOBJ = async (id, textArray) => {
       textArray.map((text) => ({
         text,
         autoAnimation: false,
-        duration: 10000,
+        duration: 70000,
         x: 0,
         y: 0,
         fromCurrentPosition: {
@@ -17,13 +17,15 @@ const CreateVaraOBJ = async (id, textArray) => {
           y: false,
         },
       })),
-      { fontSize: 8 }
+      {
+        fontSize: 8,
+        delay: 100,
+      }
     );
     vara.ready(() => {
       resolve(vara);
-    })
-  })
-
+    });
+  });
 };
 
 export default CreateVaraOBJ;
