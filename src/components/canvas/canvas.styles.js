@@ -6,4 +6,7 @@ export const StyledCanvas = styled.div`
   width: 95%;
   z-index: ${({ pageCount }) => pageCount - 1};
   pointer-events: none;
+
+  margin-left: 7%;
+  margin-top: 4%;
 `;
