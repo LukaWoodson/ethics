@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, memo, useContext } from "react";
+import { useEffect, useRef, memo, useContext } from "react";
 import { PagesLoadingContext } from "../../context/pages-loading.context";
 import create_vara_obj from "../../data/create_vara_obj";
 import { StyledCanvas } from "./canvas.styles";
@@ -10,14 +10,13 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
 
   console.log("CANVAS_RERENDER");
 
-  const { cancelLoading } = useContext(PagesLoadingContext)
+  const { cancelLoading } = useContext(PagesLoadingContext);
 
   useEffect(() => {
     vara.current = create_vara_obj(ID, [textArray]);
     // only last page cancels the loading state
     pageCount - 2 === id && cancelLoading();
-
-  }, [ID, textArray]);
+  }, [ID, cancelLoading, id, pageCount, textArray]);
 
   const draw = () => {
     hasBeenDrawn.current = true;
