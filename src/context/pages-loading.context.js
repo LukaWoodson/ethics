@@ -1,16 +1,17 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import LoaderComponent from "../components/loader/loader.component";
-
 
 export const PagesLoadingContext = createContext();
 
 export const PagesLoadingProvider = ({ children }) => {
-    const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-    const cancelLoading = () => setIsLoading(false)
+  const cancelLoading = () => setIsLoading(false);
 
-    return <PagesLoadingContext.Provider value={{ cancelLoading, isLoading }}>
-        <LoaderComponent isLoading={isLoading} />
-        {children}
+  return (
+    <PagesLoadingContext.Provider value={{ cancelLoading, isLoading }}>
+      <LoaderComponent isLoading={isLoading} />
+      {children}
     </PagesLoadingContext.Provider>
-}
+  );
+};
