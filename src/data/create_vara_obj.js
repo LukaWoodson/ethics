@@ -8,7 +8,7 @@ const CreateVaraOBJ = (id, textArray) => {
     textArray.map((text) => ({
       text,
       autoAnimation: false,
-      duration: 10000, // ----------- good duration is 70000
+      duration: 70000, // ----------- good duration is 70000
       x: 0,
       y: 0,
       fromCurrentPosition: {
@@ -16,7 +16,7 @@ const CreateVaraOBJ = (id, textArray) => {
         y: false,
       },
     })),
-    { fontSize: 8 } // ----------- add delay, start at 100
+    { fontSize: 8, delay: 100 } // ----------- add delay, start at 100
   );
 };
 
