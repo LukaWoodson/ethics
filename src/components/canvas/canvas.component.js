@@ -13,10 +13,12 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const { cancelLoading } = useContext(PagesLoadingContext);
 
   useEffect(() => {
-    vara.current = create_vara_obj(ID, [textArray]);
-    // only last page cancels the loading state
-    pageCount - 2 === id && cancelLoading();
-  }, [ID, cancelLoading, id, pageCount, textArray]);
+    setTimeout(() => {
+      vara.current = create_vara_obj(ID, [textArray]);
+      // only last page cancels the loading state
+      pageCount - 2 === id && cancelLoading();
+    }, 0)
+  }, []);
 
   const draw = () => {
     hasBeenDrawn.current = true;
