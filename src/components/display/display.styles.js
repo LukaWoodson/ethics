@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CoverURL from "../../assets/leather_texture.jpg";
-import PaperURL from "../../assets/paper.png";
+import PaperURL from "../../assets/paper.jpg";
 
 // -------------- SITE --------------
 
