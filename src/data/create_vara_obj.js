@@ -9,7 +9,7 @@ const CreateVaraOBJ = async (id, textArray) => {
       textArray.map((text) => ({
         text,
         autoAnimation: false,
-        duration: 70000,
+        duration: 70000, // ----------- good speed is 70000
         x: 0,
         y: 0,
         fromCurrentPosition: {
@@ -19,7 +19,7 @@ const CreateVaraOBJ = async (id, textArray) => {
       })),
       {
         fontSize: 8,
-        delay: 100,
+        delay: 100, // ------------ good delay is 100
       }
     );
     vara.ready(() => {
