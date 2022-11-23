@@ -18,7 +18,6 @@ const content = Doc_parser();
 const BOOK_COVER_ID = 0;
 
 function DisplayComponent() {
-
   const currentPageIndex = useRef(0);
 
   // first item is the cover, and the rest are all pages
@@ -32,10 +31,11 @@ function DisplayComponent() {
   ]);
   const [isBookTurned, setBookTurned] = useState(false);
 
-  const _isLoading = useRef(false)
+  const _isLoading = useRef(false);
 
   const handleFlip = async (id, e = null) => {
-    if (_isLoading.current) return;
+    console.log(currentPageIndex.current);
+    if (_isLoading.current || id !== currentPageIndex.current) return;
     _isLoading.current = true;
     e?.stopPropagation();
     const { isFlipped } = pages[id];
@@ -43,15 +43,15 @@ function DisplayComponent() {
       pages.map((page) =>
         page.id === id
           ? {
-            ...page,
-            isFlipped: !isFlipped,
-            zIndex: !isFlipped ? pages.length + id : pages.length - id,
-          }
+              ...page,
+              isFlipped: !isFlipped,
+              zIndex: !isFlipped ? pages.length + id : pages.length - id,
+            }
           : page
       )
     );
     id === 0 && setBookTurned(!isBookTurned);
-    isFlipped ? currentPageIndex.current++ : currentPageIndex.current--;
+    isFlipped ? currentPageIndex.current-- : currentPageIndex.current++;
     await delay(800);
     _isLoading.current = false;
   };
@@ -65,10 +65,10 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-            ...page,
-            isFlipped: false,
-            zIndex: pages.length - i,
-          }
+              ...page,
+              isFlipped: false,
+              zIndex: pages.length - i,
+            }
           : page
       );
       setPages(newPages);
@@ -82,8 +82,6 @@ function DisplayComponent() {
   const delay = async (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
-
-
 
   // Title: Revenge of the Code
 
@@ -105,36 +103,35 @@ function DisplayComponent() {
           >
             {pages.at(BOOK_COVER_ID).zIndex}
           </FrontCover>
-          {
-            pages
-              .filter((page) => page.id !== BOOK_COVER_ID)
-              .map(({ isFlipped, id, zIndex }, index) => {
-                return (
-                  <Page
-                    key={`${id}-page`}
-                    isFlipped={isFlipped}
-                    id={id}
-                    isBookTurned={isBookTurned}
-                    index={index}
-                    zIndex={zIndex}
-                    style={{
-                      borderBottom: index % 2 || isFlipped ? "1px solid grey" : "",
-                      borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
-                    }}
-                    onClick={(e) => handleFlip(id, e)}
-                  >
-                    <div className="front">
-                      <CanvasComponent
-                        pageCount={pages.length}
-                        isShown={pages[index].isFlipped}
-                        id={index}
-                        textArray={content[index]}
-                      />
-                    </div>
-                  </Page>
-                );
-              })
-          }
+          {pages
+            .filter((page) => page.id !== BOOK_COVER_ID)
+            .map(({ isFlipped, id, zIndex }, index) => {
+              return (
+                <Page
+                  key={`${id}-page`}
+                  isFlipped={isFlipped}
+                  id={id}
+                  isBookTurned={isBookTurned}
+                  index={index}
+                  zIndex={zIndex}
+                  style={{
+                    borderBottom:
+                      index % 2 || isFlipped ? "1px solid grey" : "",
+                    borderRight: index % 2 || isFlipped ? "1px solid grey" : "",
+                  }}
+                  onClick={(e) => handleFlip(id, e)}
+                >
+                  <div className="front">
+                    <CanvasComponent
+                      pageCount={pages.length}
+                      isShown={pages[index].isFlipped}
+                      id={index}
+                      textArray={content[index]}
+                    />
+                  </div>
+                </Page>
+              );
+            })}
           <BackCover isBookTurned={isBookTurned} />
         </Book>
       </ContentContainer>

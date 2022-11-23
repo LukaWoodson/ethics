@@ -77,7 +77,6 @@ export const Book = styled.div`
   margin: auto;
   height: 70%;
   aspect-ratio: 8.5/11;
-  
 `;
 
 export const Page = styled.div`
@@ -99,9 +98,11 @@ export const Page = styled.div`
   padding-bottom: ${({ index, isBookTurned }) =>
     `${isBookTurned ? index / 20 : index / 3.4}%`};
   transform-origin: left;
-  transform: ${({ isFlipped, index, theme, isBookTurned }) => `rotateY(${isFlipped ? "-180deg" : "0"}) translateZ(${isBookTurned ? 0 : -index * theme.page.zTranslateScalar}px)`};
-  // TODO: choose a good delay for the z-index
-  transition: transform 2s, padding 1s, background-color 2s, z-index 0s 300ms;
+  transform: ${({ isFlipped, index, theme, isBookTurned }) =>
+    `rotateY(${isFlipped ? "-180deg" : "0"}) translateZ(${
+      isBookTurned ? 0 : -index * theme.page.zTranslateScalar
+    }px)`};
+  transition: transform 2s, padding 1s, background-color 2s, z-index 0s 100ms;
   border-left: 1px solid grey;
 
   & > * {
