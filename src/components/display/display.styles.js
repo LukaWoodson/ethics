@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CoverURL from "../../assets/leather_texture.jpg";
 
 // -------------- SITE --------------
 
@@ -34,17 +35,18 @@ export const BookCover = styled.div`
   height: 100%;
   width: 100%;
   z-index: ${({ zIndex }) => zIndex || -100000000};
-  background-color: ${({ theme }) => theme.book.cover};
+  background-image: url(${CoverURL});
+  background-size: cover;
   position: absolute;
   top: 0;
   left: 0;
+  border: #1a0d01 2px solid;
 `;
 
 export const BackCover = styled(BookCover)`
   transition-duration: 1s;
   background-color: ${({ isFlipped, theme }) =>
     isFlipped ? theme.book.cover : theme.book.coverClosed};
-  border: #1a0d01 5px solid;
   top: 0;
   left: 0;
   transform: translateZ(-3rem);
@@ -59,7 +61,6 @@ export const FrontCover = styled(BookCover)`
   transition-duration: 2s;
   transform-origin: left;
   transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"})`};
-  border: #1a0d01 5px solid;
 `;
 
 export const Book = styled.div`
@@ -117,7 +118,8 @@ export const BookSide = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  background: ${({ theme }) => theme.book.cover};
+  background-image: url(${CoverURL});
+  background-size: cover;
   border: #1a0d01 5px solid;
   transform-origin: left;
   transform: rotateY(90deg);
