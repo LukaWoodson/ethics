@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CoverURL from "../../assets/leather_texture.jpg";
+import PaperURL from "../../assets/paper.png";
 
 // -------------- SITE --------------
 
@@ -81,14 +82,15 @@ export const Book = styled.div`
 `;
 
 export const Page = styled.div`
-  background: rgb(164, 164, 164);
-  background: linear-gradient(
-    90deg,
-    rgba(164, 164, 164, 1) 0%,
-    rgba(215, 215, 215, 1) 7%,
-    rgba(231, 231, 231, 1) 14%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.22) 0%,
+      rgba(120, 120, 120, 0.1) 9%,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    url(${PaperURL});
+  background-size: cover;
   position: absolute;
   height: ${({ theme }) => theme.page.height};
   top: ${({ theme }) => theme.page.top};
@@ -107,7 +109,7 @@ export const Page = styled.div`
   border-left: 1px solid grey;
 
   & > * {
-    opacity: ${({ isFlipped }) => (isFlipped ? "5%" : "100%")};
+    opacity: ${({ isFlipped }) => (isFlipped ? "10%" : "100%")};
     transition: opacity 150ms 500ms;
   }
 `;

@@ -7,7 +7,6 @@ import { DATA } from "./data";
  */
 export const Doc_parser = () => {
   const data = DATA.replaceAll("\n", "").split(" ");
-  console.log(data);
   const MAX = 396;
   let currString = 0;
   let charCount = 0;
