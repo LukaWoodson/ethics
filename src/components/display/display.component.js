@@ -36,7 +36,7 @@ function DisplayComponent() {
   const { isLoading: arePagesLoading } = useContext(PagesLoadingContext)
 
   const handleFlip = async (id, e = null) => {
-    if (_isLoading.current || arePagesLoading || id !== currentPageIndex.current) return;
+    if (_isLoading.current || arePagesLoading || (id !== currentPageIndex.current && id !== currentPageIndex.current - 1)) return;
     _isLoading.current = true;
     e?.stopPropagation();
     const { isFlipped } = pages[id];
