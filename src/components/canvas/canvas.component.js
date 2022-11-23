@@ -1,4 +1,4 @@
-import { useEffect, useRef, memo, useContext } from "react";
+import { useEffect, useRef, memo, useContext, useLayoutEffect } from "react";
 import { PagesLoadingContext } from "../../context/pages-loading.context";
 import create_vara_obj from "../../data/create_vara_obj";
 import { StyledCanvas } from "./canvas.styles";
@@ -12,12 +12,12 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
 
   const { cancelLoading } = useContext(PagesLoadingContext);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTimeout(() => {
       vara.current = create_vara_obj(ID, [textArray]);
       // only last page cancels the loading state
       pageCount - 2 === id && cancelLoading();
-    }, 2000);
+    }, 3000);
   }, []);
 
   const draw = () => {

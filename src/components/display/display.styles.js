@@ -36,6 +36,7 @@ export const BookCover = styled.div`
   height: 100%;
   width: 100%;
   z-index: ${({ zIndex }) => zIndex || -100000000};
+  background-color: #5f4b3b;
   background-image: url(${CoverURL});
   background-size: cover;
   position: absolute;
@@ -82,6 +83,7 @@ export const Book = styled.div`
 `;
 
 export const Page = styled.div`
+  background-color: #f3e4ba;
   background-image: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.22) 0%,
@@ -120,6 +122,7 @@ export const BookSide = styled.div`
   position: relative;
   top: 0;
   left: 0;
+  background-color: #5f4b3b;
   background-image: url(${CoverURL});
   background-size: cover;
   border: #1a0d01 5px solid;
