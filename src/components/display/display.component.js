@@ -10,7 +10,7 @@ import {
   TitleWrapper,
 } from "./display.styles";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
 

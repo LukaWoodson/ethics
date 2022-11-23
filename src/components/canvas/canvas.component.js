@@ -13,7 +13,7 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   useEffect(() => {
     vara.current = create_vara_obj(ID, [textArray]);
     setIsLoading(false);
-  }, []);
+  }, [ID, textArray]);
 
   const draw = () => {
     hasBeenDrawn.current = true;
@@ -23,8 +23,7 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   // when the page is flipped to, and is finished loading
   useEffect(() => {
     console.log({ isShown, isLoading });
-    if (hasBeenDrawn.current) return;
-    else if (isShown && !isLoading) draw();
+    if (!hasBeenDrawn.current && isShown && !isLoading) draw();
   }, [isShown, isLoading]);
 
   return <StyledCanvas id={ID} pageCount={pageCount} isShown={isShown} />;
