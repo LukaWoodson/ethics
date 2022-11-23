@@ -17,7 +17,7 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
       vara.current = create_vara_obj(ID, [textArray]);
       // only last page cancels the loading state
       pageCount - 2 === id && cancelLoading();
-    }, 0)
+    }, 2000);
   }, []);
 
   const draw = () => {
