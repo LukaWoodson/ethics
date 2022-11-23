@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useRef, useState, memo, useContext } from "react";
+import { PagesLoadingContext } from "../../context/pages-loading.context";
 import create_vara_obj from "../../data/create_vara_obj";
 import { StyledCanvas } from "./canvas.styles";
 
@@ -8,11 +9,14 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const ID = `element-${id}`;
 
   console.log("CANVAS_RERENDER");
-  const [isLoading, setIsLoading] = useState(true);
+
+  const { cancelLoading } = useContext(PagesLoadingContext)
 
   useEffect(() => {
     vara.current = create_vara_obj(ID, [textArray]);
-    setIsLoading(false);
+    // only last page cancels the loading state
+    pageCount - 2 === id && cancelLoading();
+
   }, [ID, textArray]);
 
   const draw = () => {
@@ -22,9 +26,8 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
 
   // when the page is flipped to, and is finished loading
   useEffect(() => {
-    console.log({ isShown, isLoading });
-    if (!hasBeenDrawn.current && isShown && !isLoading) draw();
-  }, [isShown, isLoading]);
+    if (!hasBeenDrawn.current && isShown) draw();
+  }, [isShown]);
 
   return <StyledCanvas id={ID} pageCount={pageCount} isShown={isShown} />;
 };

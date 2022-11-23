@@ -10,9 +10,10 @@ import {
   TitleWrapper,
 } from "./display.styles";
 
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
+import { PagesLoadingContext } from "../../context/pages-loading.context";
 
 const content = Doc_parser();
 const BOOK_COVER_ID = 0;
@@ -32,10 +33,10 @@ function DisplayComponent() {
   const [isBookTurned, setBookTurned] = useState(false);
 
   const _isLoading = useRef(false);
+  const { isLoading: arePagesLoading } = useContext(PagesLoadingContext)
 
   const handleFlip = async (id, e = null) => {
-    console.log(currentPageIndex.current);
-    if (_isLoading.current || id !== currentPageIndex.current) return;
+    if (_isLoading.current || arePagesLoading || id !== currentPageIndex.current) return;
     _isLoading.current = true;
     e?.stopPropagation();
     const { isFlipped } = pages[id];
@@ -43,10 +44,10 @@ function DisplayComponent() {
       pages.map((page) =>
         page.id === id
           ? {
-              ...page,
-              isFlipped: !isFlipped,
-              zIndex: !isFlipped ? pages.length + id : pages.length - id,
-            }
+            ...page,
+            isFlipped: !isFlipped,
+            zIndex: !isFlipped ? pages.length + id : pages.length - id,
+          }
           : page
       )
     );
@@ -57,7 +58,7 @@ function DisplayComponent() {
   };
 
   const handleClose = async () => {
-    if (_isLoading.current) return;
+    if (_isLoading.current || arePagesLoading) return;
     isBookTurned && setBookTurned(!isBookTurned);
     _isLoading.current = true;
     let newPages = pages;
@@ -65,10 +66,10 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-              ...page,
-              isFlipped: false,
-              zIndex: pages.length - i,
-            }
+            ...page,
+            isFlipped: false,
+            zIndex: pages.length - i,
+          }
           : page
       );
       setPages(newPages);
@@ -100,9 +101,7 @@ function DisplayComponent() {
             isFlipped={pages.at(BOOK_COVER_ID).isFlipped}
             onClick={(e) => handleFlip(BOOK_COVER_ID, e)}
             key={`${BOOK_COVER_ID}-page`}
-          >
-            {pages.at(BOOK_COVER_ID).zIndex}
-          </FrontCover>
+          />
           {pages
             .filter((page) => page.id !== BOOK_COVER_ID)
             .map(({ isFlipped, id, zIndex }, index) => {
