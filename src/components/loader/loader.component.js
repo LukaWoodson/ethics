@@ -26,7 +26,7 @@ const LoaderComponent = ({ isLoading }) => {
           <div className="hands" />
           <div className="body" />
           <div className="head">
-            <div className="eye"></div>
+            <div className="eye" />
           </div>
         </div>
         <div className="textWrapper">

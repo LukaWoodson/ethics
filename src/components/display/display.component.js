@@ -33,10 +33,15 @@ function DisplayComponent() {
   const [isBookTurned, setBookTurned] = useState(false);
 
   const _isLoading = useRef(false);
-  const { isLoading: arePagesLoading } = useContext(PagesLoadingContext)
+  const { isLoading: arePagesLoading } = useContext(PagesLoadingContext);
 
   const handleFlip = async (id, e = null) => {
-    if (_isLoading.current || arePagesLoading || (id !== currentPageIndex.current && id !== currentPageIndex.current - 1)) return;
+    if (
+      _isLoading.current ||
+      arePagesLoading ||
+      (id !== currentPageIndex.current && id !== currentPageIndex.current - 1)
+    )
+      return;
     _isLoading.current = true;
     e?.stopPropagation();
     const { isFlipped } = pages[id];
@@ -44,10 +49,10 @@ function DisplayComponent() {
       pages.map((page) =>
         page.id === id
           ? {
-            ...page,
-            isFlipped: !isFlipped,
-            zIndex: !isFlipped ? pages.length + id : pages.length - id,
-          }
+              ...page,
+              isFlipped: !isFlipped,
+              zIndex: !isFlipped ? pages.length + id : pages.length - id,
+            }
           : page
       )
     );
@@ -66,10 +71,10 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-            ...page,
-            isFlipped: false,
-            zIndex: pages.length - i,
-          }
+              ...page,
+              isFlipped: false,
+              zIndex: pages.length - i,
+            }
           : page
       );
       setPages(newPages);
@@ -88,10 +93,6 @@ function DisplayComponent() {
 
   return (
     <SiteWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
-      <TitleWrapper id={"TITLE WRAPPER"}>
-        <Title id={"TITLE"}>Ethics in the Profession - Final Project</Title>
-      </TitleWrapper>
-
       <ContentContainer id={"container"}>
         <Book id="book" isBookTurned={isBookTurned}>
           <BookSide id="side" />
