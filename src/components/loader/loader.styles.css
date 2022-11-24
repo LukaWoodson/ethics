@@ -46,7 +46,7 @@
 
 .circ{
     backface-visibility: hidden;
-    margin: 60px auto;
+    margin: auto;
     width: 180px;
     height: 180px;
     background-color: #111;
@@ -75,11 +75,17 @@
     animation-timing-function:ease-out;
 }
 
+.textWrapper{
+    width: 13rem;
+    overflow: hidden;
+    display: flex;
+    margin: auto;
+    padding-left: 3rem;
+}
+
 .load{
     width: 7ch;
     height: 2ex;
-    text-align: center;
-    margin:auto -1rem;
     font-family: 'Press Start 2P', cursive;
     font-size:20px;
     font-weight:400;
@@ -87,7 +93,7 @@
     word-wrap: break-word;
     display:block;
     overflow: hidden;
-    animation: fontAnim 2s ease-in-out infinite;
+    animation: fontAnim 4s ease-in-out infinite;
 }
 
 @keyframes fontAnim{

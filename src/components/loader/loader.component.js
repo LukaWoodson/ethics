@@ -3,19 +3,18 @@ import styled from "styled-components";
 
 const LoaderContainer = styled.div`
   background-color: #111111;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1000000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   & > * {
-    transform: scale(150%);
+    transform: scale(230%);
   }
 `;
 
@@ -30,7 +29,9 @@ const LoaderComponent = ({ isLoading }) => {
             <div className="eye"></div>
           </div>
         </div>
-        <div className="load">Loading...</div>
+        <div className="textWrapper">
+          <div className="load">Loading...</div>
+        </div>
       </LoaderContainer>
     )
   );
