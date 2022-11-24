@@ -10,7 +10,8 @@ export const PagesLoadingProvider = ({ children }) => {
 
   return (
     <PagesLoadingContext.Provider value={{ cancelLoading, isLoading }}>
-      <LoaderComponent isLoading={isLoading} />
+      {/*<LoaderComponent isLoading={isLoading} />*/}
+      <LoaderComponent isLoading={true} />
       {children}
     </PagesLoadingContext.Provider>
   );

@@ -1,7 +1,27 @@
-import { StyledLoader } from "./loader.styles";
+import {
+  LoaderBody,
+  LoaderCircle,
+  LoaderContainer,
+  LoaderEyes,
+  LoaderHands,
+  LoaderHead,
+  LoaderText,
+} from "./loader.styles";
 const LoaderComponent = ({ isLoading }) => {
-
-    return isLoading && <StyledLoader>isLoading...</StyledLoader>
-}
+  return (
+    isLoading && (
+      <LoaderContainer>
+        <LoaderCircle>
+          <LoaderHands />
+          <LoaderBody />
+          <LoaderHead>
+            <LoaderEyes />
+          </LoaderHead>
+          <LoaderText>Loading . . .</LoaderText>
+        </LoaderCircle>
+      </LoaderContainer>
+    )
+  );
+};
 
 export default LoaderComponent;
