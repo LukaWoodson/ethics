@@ -36,6 +36,7 @@ function DisplayComponent() {
   const { isLoading: arePagesLoading } = useContext(PagesLoadingContext);
 
   const handleFlip = async (id, e = null) => {
+    console.log("handleFlip()", _isLoading.current, arePagesLoading, id, currentPageIndex.current);
     if (
       _isLoading.current ||
       arePagesLoading ||
@@ -43,16 +44,17 @@ function DisplayComponent() {
     )
       return;
     _isLoading.current = true;
+    console.log("e.stopPropagation");
     e?.stopPropagation();
     const { isFlipped } = pages[id];
     setPages(
       pages.map((page) =>
         page.id === id
           ? {
-              ...page,
-              isFlipped: !isFlipped,
-              zIndex: !isFlipped ? pages.length + id : pages.length - id,
-            }
+            ...page,
+            isFlipped: !isFlipped,
+            zIndex: !isFlipped ? pages.length + id : pages.length - id,
+          }
           : page
       )
     );
@@ -62,7 +64,9 @@ function DisplayComponent() {
     _isLoading.current = false;
   };
 
-  const handleClose = async () => {
+  const handleClose = async (e) => {
+    console.log("handleClose()");
+    console.log(e.target);
     if (_isLoading.current || arePagesLoading) return;
     isBookTurned && setBookTurned(!isBookTurned);
     _isLoading.current = true;
@@ -71,10 +75,10 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-              ...page,
-              isFlipped: false,
-              zIndex: pages.length - i,
-            }
+            ...page,
+            isFlipped: false,
+            zIndex: pages.length - i,
+          }
           : page
       );
       setPages(newPages);
@@ -92,8 +96,8 @@ function DisplayComponent() {
   // Title: Revenge of the Code
 
   return (
-    <SiteWrapper id={"PAGE WRAPPER"} onClick={handleClose}>
-      <ContentContainer id={"container"}>
+    <SiteWrapper id={"PAGE WRAPPER"} >
+      <ContentContainer id={"container"} onClick={handleClose}>
         <Book id="book" isBookTurned={isBookTurned}>
           <BookSide id="side" />
 
@@ -114,6 +118,7 @@ function DisplayComponent() {
                   isBookTurned={isBookTurned}
                   index={index}
                   zIndex={zIndex}
+                  isShown={pages[index].isFlipped}
                   style={{
                     borderBottom:
                       index % 2 || isFlipped ? "1px solid grey" : "",
