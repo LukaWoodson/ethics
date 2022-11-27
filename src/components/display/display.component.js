@@ -6,8 +6,6 @@ import {
   FrontCover,
   Page,
   SiteWrapper,
-  Title,
-  TitleWrapper,
 } from "./display.styles";
 
 import { useContext, useRef, useState } from "react";
@@ -36,7 +34,6 @@ function DisplayComponent() {
   const { isLoading: arePagesLoading } = useContext(PagesLoadingContext);
 
   const handleFlip = async (id, e = null) => {
-    console.log("handleFlip()", _isLoading.current, arePagesLoading, id, currentPageIndex.current);
     if (
       _isLoading.current ||
       arePagesLoading ||
@@ -44,7 +41,6 @@ function DisplayComponent() {
     )
       return;
     _isLoading.current = true;
-    console.log("e.stopPropagation");
     e?.stopPropagation();
     const { isFlipped } = pages[id];
     setPages(
@@ -65,8 +61,6 @@ function DisplayComponent() {
   };
 
   const handleClose = async (e) => {
-    console.log("handleClose()");
-    console.log(e.target);
     if (_isLoading.current || arePagesLoading) return;
     isBookTurned && setBookTurned(!isBookTurned);
     _isLoading.current = true;
