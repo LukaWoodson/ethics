@@ -7,9 +7,6 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const vara = useRef(null);
   const hasBeenDrawn = useRef(false);
   const ID = `element-${id}`;
-
-  console.log("CANVAS_RERENDER");
-
   const { cancelLoading } = useContext(PagesLoadingContext);
 
   useLayoutEffect(() => {

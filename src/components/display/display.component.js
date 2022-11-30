@@ -47,10 +47,10 @@ function DisplayComponent() {
       pages.map((page) =>
         page.id === id
           ? {
-            ...page,
-            isFlipped: !isFlipped,
-            zIndex: !isFlipped ? pages.length + id : pages.length - id,
-          }
+              ...page,
+              isFlipped: !isFlipped,
+              zIndex: !isFlipped ? pages.length + id : pages.length - id,
+            }
           : page
       )
     );
@@ -69,10 +69,10 @@ function DisplayComponent() {
       newPages = newPages.map((page) =>
         page.id === i && page.isFlipped
           ? {
-            ...page,
-            isFlipped: false,
-            zIndex: pages.length - i,
-          }
+              ...page,
+              isFlipped: false,
+              zIndex: pages.length - i,
+            }
           : page
       );
       setPages(newPages);
@@ -90,7 +90,7 @@ function DisplayComponent() {
   // Title: Revenge of the Code
 
   return (
-    <SiteWrapper id={"PAGE WRAPPER"} >
+    <SiteWrapper id={"PAGE WRAPPER"}>
       <ContentContainer id={"container"} onClick={handleClose}>
         <Book id="book" isBookTurned={isBookTurned}>
           <BookSide id="side" />
@@ -134,6 +134,15 @@ function DisplayComponent() {
           <BackCover isBookTurned={isBookTurned} />
         </Book>
       </ContentContainer>
+      <div style={{ position: "absolute", bottom: "5vh", right: "5vw" }}>
+        <a
+          href="https://github.com/LukaWoodson/ethics"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Github
+        </a>
+      </div>
     </SiteWrapper>
   );
 }
