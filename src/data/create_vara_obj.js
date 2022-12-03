@@ -1,6 +1,9 @@
 import Vara from "vara";
 
 const CreateVaraOBJ = (id, textArray) => {
+  const height = window.innerHeight;
+  let fontSize = (7 / 1080) * height;
+
   return new Vara(
     `#${id}`,
     "pacificoSLO.json",
@@ -15,7 +18,7 @@ const CreateVaraOBJ = (id, textArray) => {
         y: false,
       },
     })),
-    { fontSize: 5.5, delay: 100 } // ----------- fontSize: start at 7 , delay: start at 100
+    { fontSize, delay: 100 } // ----------- fontSize: start at 7 , delay: start at 100
   );
 };
 
