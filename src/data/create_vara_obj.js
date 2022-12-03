@@ -10,7 +10,7 @@ const CreateVaraOBJ = (id, textArray) => {
     textArray.map((text) => ({
       text,
       autoAnimation: false,
-      duration: 5000, // ----------- good duration is 70000
+      duration: text.length * 100, // ----------- good duration is
       x: 0,
       y: 0,
       fromCurrentPosition: {
