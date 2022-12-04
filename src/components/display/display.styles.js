@@ -154,7 +154,6 @@ export const BookSide = styled.div`
 
 export const TextWrapper = styled.div`
   display: flex;
-  text-align: justify;
   padding: 3vh;
   font-family: "Homemade Apple", cursive;
   font-size: 1.75vh;
