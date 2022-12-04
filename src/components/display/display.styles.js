@@ -67,6 +67,8 @@ export const FrontCover = styled(BookCover)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: ${({ isFlipped }) =>
+    isFlipped ? "0 10px 20px 5px rgba(0, 0, 0, 0.75)" : ""};
 
   & > * {
     font-family: "La Belle Aurore", cursive;
