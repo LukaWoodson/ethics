@@ -51,8 +51,7 @@ export const BackCover = styled(BookCover)`
     isFlipped ? theme.book.cover : theme.book.coverClosed};
   top: 0;
   left: 0;
-  transform: translateZ(-3rem);
-  // TODO: fix box shadow by picking desirable values
+  transform: translateZ(-8vh);
   box-shadow: ${({ isBookTurned }) =>
     isBookTurned
       ? "0 20px 20px 5px rgba(0, 0, 0, 0.75)"
@@ -121,10 +120,7 @@ export const Page = styled.div`
   top: ${({ theme }) => theme.page.top};
   aspect-ratio: ${({ theme }) => theme.page.aspectRatio};
   z-index: ${({ zIndex }) => zIndex};
-  padding-right: ${({ index, isBookTurned }) =>
-    `${isBookTurned ? index / 20 : index / 30}%`};
-  padding-bottom: ${({ index, isBookTurned }) =>
-    `${isBookTurned ? index / 20 : index / 3.4}%`};
+
   transform-origin: left;
   transform: ${({ isFlipped, index, theme, isBookTurned, isShown }) =>
     `rotateY(${isFlipped ? "-180deg" : "0"}) ${getTranslateZ(
@@ -132,7 +128,7 @@ export const Page = styled.div`
       index,
       theme,
       isShown
-    )}`};
+    )} translateY(${index / 20}vh)`};
   transition: transform 2s, padding 1s, background-color 2s, z-index 0s 100ms;
   border-left: 1px solid grey;
 
@@ -143,8 +139,8 @@ export const Page = styled.div`
 `;
 
 export const BookSide = styled.div`
-  width: 2rem;
-  height: 100%;
+  width: 7vh;
+  height: calc(100% - 8px);
   position: relative;
   top: 0;
   left: 0;
@@ -155,3 +151,8 @@ export const BookSide = styled.div`
   transform-origin: left;
   transform: rotateY(90deg);
 `;
+
+// padding-right: ${({ index, isBookTurned }) =>
+//       `${isBookTurned ? index / 20 : index / 30}%`};
+//   padding-bottom: ${({ index, isBookTurned }) =>
+//       `${isBookTurned ? index / 20 : index / 3.4}%`};
