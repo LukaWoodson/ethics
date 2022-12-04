@@ -101,8 +101,26 @@ function DisplayComponent() {
             onClick={(e) => handleFlip(BOOK_COVER_ID, e)}
             key={`${BOOK_COVER_ID}-page`}
           >
-            <h1 style={{ fontSize: "58pt" }}>Revenge of the Code</h1>
-            <h2 style={{ fontSize: "32pt" }}>An Attempted Sabotage</h2>
+            <h1
+              style={{
+                fontSize: "58pt",
+                textShadow: "2px 2px 3px #9b1b1b80",
+                color: "#2a00007a",
+                marginTop: "8rem",
+              }}
+            >
+              Revenge of the Code
+            </h1>
+            <h2
+              style={{
+                fontSize: "32pt",
+                color: "#2a00008f",
+                textShadow: "2px 2px 3px #9b1b1b80",
+                marginTop: "2rem",
+              }}
+            >
+              An Attempted Sabotage
+            </h2>
           </FrontCover>
           {pages
             .filter((page) => page.id !== BOOK_COVER_ID)

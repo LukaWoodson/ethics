@@ -69,7 +69,6 @@ export const FrontCover = styled(BookCover)`
   align-items: center;
 
   & > * {
-    margin-top: 2rem;
     font-family: "La Belle Aurore", cursive;
     opacity: ${({ isFlipped }) => (isFlipped ? "10%" : "100%")};
     transition: opacity 150ms 500ms;
