@@ -74,6 +74,7 @@ export const FrontCover = styled(BookCover)`
     opacity: ${({ isFlipped }) => (isFlipped ? "10%" : "100%")};
     transition: opacity 150ms 500ms;
     pointer-events: none;
+    user-select: none;
   }
 `;
 
@@ -152,7 +153,11 @@ export const BookSide = styled.div`
   transform: rotateY(90deg);
 `;
 
-// padding-right: ${({ index, isBookTurned }) =>
-//       `${isBookTurned ? index / 20 : index / 30}%`};
-//   padding-bottom: ${({ index, isBookTurned }) =>
-//       `${isBookTurned ? index / 20 : index / 3.4}%`};
+export const TextWrapper = styled.div`
+  display: flex;
+  text-align: justify;
+  padding: 3vh;
+  font-family: "Homemade Apple", cursive;
+  font-size: 1.75vh;
+  user-select: none;
+`;

@@ -6,6 +6,7 @@ import {
   FrontCover,
   Page,
   SiteWrapper,
+  TextWrapper,
 } from "./display.styles";
 
 import { useContext, useRef, useState } from "react";
@@ -141,14 +142,15 @@ function DisplayComponent() {
                   }}
                   onClick={(e) => handleFlip(id, e)}
                 >
-                  <div className="front">
-                    <CanvasComponent
-                      pageCount={pages.length}
-                      isShown={pages[index].isFlipped}
-                      id={index}
-                      textArray={content[index]}
-                    />
-                  </div>
+                  <TextWrapper className="front">
+                    {/*<CanvasComponent*/}
+                    {/*  pageCount={pages.length}*/}
+                    {/*  isShown={pages[index].isFlipped}*/}
+                    {/*  id={index}*/}
+                    {/*  textArray={content[index]}*/}
+                    {/*/>*/}
+                    {content[index]}
+                  </TextWrapper>
                 </Page>
               );
             })}
