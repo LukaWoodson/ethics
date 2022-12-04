@@ -103,17 +103,17 @@ function DisplayComponent() {
           >
             <h1
               style={{
-                fontSize: "58pt",
+                fontSize: "6vh",
                 textShadow: "2px 2px 3px #9b1b1b80",
                 color: "#2a00007a",
-                marginTop: "8rem",
+                marginTop: "8vh",
               }}
             >
               Revenge of the Code
             </h1>
             <h2
               style={{
-                fontSize: "32pt",
+                fontSize: "3.5vh",
                 color: "#2a00008f",
                 textShadow: "2px 2px 3px #9b1b1b80",
                 marginTop: "2rem",
