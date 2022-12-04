@@ -6,7 +6,7 @@ import { DATA } from "./data";
  * @constructor
  */
 export const Doc_parser = () => {
-  const data = DATA.replaceAll("\n", "").split(" ");
+  const data = DATA.replace("\n", "").split(" ");
   const MAX = 590;
   let currString = 0;
   let charCount = 0;
