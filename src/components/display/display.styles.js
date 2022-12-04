@@ -62,7 +62,18 @@ export const BackCover = styled(BookCover)`
 export const FrontCover = styled(BookCover)`
   transition-duration: 2s;
   transform-origin: left;
-  transform: ${({ isFlipped }) => `rotateY(${isFlipped ? "-180deg" : "0"}) translateZ(1px)`};
+  transform: ${({ isFlipped }) =>
+    `rotateY(${isFlipped ? "-180deg" : "0"}) translateZ(1px)`};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > * {
+    margin-top: 2rem;
+    font-family: "La Belle Aurore", cursive;
+    opacity: ${({ isFlipped }) => (isFlipped ? "10%" : "100%")};
+    transition: opacity 150ms 500ms;
+  }
 `;
 
 export const Book = styled.div`
@@ -85,12 +96,12 @@ export const Book = styled.div`
 const getTranslateZ = (isBookTurned, index, theme, isShown) => {
   // translateZ(${isBookTurned ? -(index + 1) : -index * theme.page.zTranslateScalar}px)
   if (isBookTurned) {
-    return `translateZ(${isShown ? 1 : -index}px)`
+    return `translateZ(${isShown ? 1 : -index}px)`;
   } else {
     // offset the pages when book is closed
-    return `translateZ(${-index * theme.page.zTranslateScalar}px)`
+    return `translateZ(${-index * theme.page.zTranslateScalar}px)`;
   }
-}
+};
 
 export const Page = styled.div`
   background-color: #f3e4ba;
@@ -114,7 +125,12 @@ export const Page = styled.div`
     `${isBookTurned ? index / 20 : index / 3.4}%`};
   transform-origin: left;
   transform: ${({ isFlipped, index, theme, isBookTurned, isShown }) =>
-    `rotateY(${isFlipped ? "-180deg" : "0"}) ${getTranslateZ(isBookTurned, index, theme, isShown)}`};
+    `rotateY(${isFlipped ? "-180deg" : "0"}) ${getTranslateZ(
+      isBookTurned,
+      index,
+      theme,
+      isShown
+    )}`};
   transition: transform 2s, padding 1s, background-color 2s, z-index 0s 100ms;
   border-left: 1px solid grey;
 

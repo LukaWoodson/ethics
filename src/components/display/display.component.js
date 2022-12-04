@@ -100,7 +100,10 @@ function DisplayComponent() {
             isFlipped={pages.at(BOOK_COVER_ID).isFlipped}
             onClick={(e) => handleFlip(BOOK_COVER_ID, e)}
             key={`${BOOK_COVER_ID}-page`}
-          />
+          >
+            <h1 style={{ fontSize: "58pt" }}>Revenge of the Code</h1>
+            <h2 style={{ fontSize: "32pt" }}>An Attempted Sabotage</h2>
+          </FrontCover>
           {pages
             .filter((page) => page.id !== BOOK_COVER_ID)
             .map(({ isFlipped, id, zIndex }, index) => {
