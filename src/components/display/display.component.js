@@ -77,7 +77,7 @@ function DisplayComponent() {
           : page
       );
       setPages(newPages);
-      await delay(300);
+      await delay(200);
     }
 
     currentPageIndex.current = 0;
@@ -117,7 +117,7 @@ function DisplayComponent() {
                 fontSize: "3.5vh",
                 color: "#2a00008f",
                 textShadow: "2px 2px 3px #9b1b1b80",
-                marginTop: "2rem",
+                marginTop: "2vh",
               }}
             >
               An Attempted Sabotage

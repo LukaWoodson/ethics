@@ -66,8 +66,6 @@ export const FrontCover = styled(BookCover)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: ${({ isFlipped }) =>
-    isFlipped ? "0 10px 20px 5px rgba(0, 0, 0, 0.75)" : ""};
 
   & > * {
     font-family: "La Belle Aurore", cursive;
@@ -129,7 +127,7 @@ export const Page = styled.div`
       index,
       theme,
       isShown
-    )} translateY(${index / 20}vh)`};
+    )} translateY(${!isBookTurned ? index / 20 : 0}vh)`};
   transition: transform 2s, padding 1s, background-color 2s, z-index 0s 100ms;
   border-left: 1px solid grey;
 
@@ -160,4 +158,5 @@ export const TextWrapper = styled.div`
   font-family: "Homemade Apple", cursive;
   font-size: 1.75vh;
   user-select: none;
+  word-spacing: 1vh;
 `;
