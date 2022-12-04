@@ -74,6 +74,7 @@ export const FrontCover = styled(BookCover)`
     opacity: ${({ isFlipped }) => (isFlipped ? "10%" : "100%")};
     transition: opacity 150ms 500ms;
     pointer-events: none;
+    user-select: none;
   }
 `;
 

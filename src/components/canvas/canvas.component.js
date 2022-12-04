@@ -20,6 +20,7 @@ const CanvasComponent = ({ pageCount, isShown, textArray, id }) => {
   const draw = () => {
     hasBeenDrawn.current = true;
     vara.current.draw(0);
+    vara.current = null;
   };
 
   // when the page is flipped to, and is finished loading

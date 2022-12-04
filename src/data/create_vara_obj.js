@@ -2,7 +2,7 @@ import Vara from "vara";
 
 const CreateVaraOBJ = (id, textArray) => {
   const height = window.innerHeight;
-  let fontSize = (7 / 1080) * height;
+  let fontSize = (6 / 1080) * height;
 
   return new Vara(
     `#${id}`,
@@ -10,7 +10,7 @@ const CreateVaraOBJ = (id, textArray) => {
     textArray.map((text) => ({
       text,
       autoAnimation: false,
-      duration: text.length * 100, // ----------- good duration is
+      duration: text.length * 100, // ----------- good duration is text.length * 100
       x: 0,
       y: 0,
       fromCurrentPosition: {

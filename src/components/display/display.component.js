@@ -13,11 +13,11 @@ import CanvasComponent from "../canvas/canvas.component";
 import { Doc_parser } from "../../data/doc_parser";
 import { PagesLoadingContext } from "../../context/pages-loading.context";
 
-const content = Doc_parser();
 const BOOK_COVER_ID = 0;
 
 function DisplayComponent() {
   const currentPageIndex = useRef(0);
+  const content = Doc_parser();
 
   // first item is the cover, and the rest are all pages
   const [pages, setPages] = useState([
