@@ -1,3 +1,8 @@
+# A Handwritten Book
+A book that writes itself once a story is added to the data.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
